@@ -110,6 +110,63 @@ header {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+.avatar {
+  display:block;
+  width:150px;
+  height:150px;
+  max-width:100%;
+  padding:5px;
+  margin:0 0 20px;
+  border:1px solid #e0e0e0;
+  border-radius:50%;
+}
+
+/* Neutralise the button-bar styles applied by the generic `header ul` rules. */
+header ul.links {
+  position:static;
+  list-style:none;
+  width:auto;
+  height:auto;
+  margin:0 0 20px;
+  padding:0;
+  background:transparent;
+  border:0;
+  border-radius:0;
+}
+
+header ul.links li {
+  display:block;
+  float:none;
+  width:auto;
+  height:auto;
+  border-right:0;
+}
+
+header ul.links li:first-child a,
+header ul.links li:last-child a {
+  border-radius:0;
+}
+
+header ul.links a {
+  display:block;
+  height:auto;
+  padding:2px 0;
+  border-radius:0;
+  font-size:13px;
+  line-height:1.5;
+  text-align:left;
+  color:#595959;
+}
+
+header ul.links a i {
+  margin-right:0.4em;
+  text-align:center;
+}
+
+header ul.links a:hover {
+  color:#39c;
+}
+
 header ul {
   list-style:none;
   height:40px;
