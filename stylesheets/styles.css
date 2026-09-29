@@ -282,7 +282,8 @@ footer {
 
   header {
     order:1;
-    padding-right:320px;
+    padding-right:0;
+    text-align:center;
   }
 
   section {
@@ -296,6 +297,32 @@ footer {
   footer {
     order:3;
     margin-top:0;
+  }
+
+  /* Stacked layout: centre the profile block. The avatar is a fixed-width
+     block, so `margin:auto` centres it. The link list becomes a single
+     centred row here; on wider screens it stays the vertical column. */
+  .avatar {
+    margin:0 auto 20px;
+  }
+
+  header ul.links {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    column-gap:1.25em;
+    row-gap:0.25em;
+    text-align:center;
+  }
+
+  header ul.links li {
+    width:auto;
+  }
+
+  header ul.links a {
+    white-space:nowrap;
+    text-align:center;
   }
 
   header a small {
