@@ -103,10 +103,17 @@ img {
   max-width:100%;
 }
 
-header {
-  width:270px;
-  float:left;
+.sidebar {
   position:fixed;
+  width:270px;
+  display:flex;
+  flex-direction:column;
+  height:calc(100vh - 100px);
+  overflow-y:auto;
+}
+
+header {
+  width:auto;
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
@@ -152,14 +159,16 @@ header ul.links a {
   height:auto;
   padding:2px 0;
   border-radius:0;
-  font-size:13px;
+  font-size:15px;
   line-height:1.5;
   text-align:left;
   color:#595959;
 }
 
 header ul.links a i {
-  margin-right:0.4em;
+  font-size:17px;
+  vertical-align:-0.05em;
+  margin-right:0.3em;
   text-align:center;
 }
 
@@ -244,10 +253,8 @@ hr {
 }
 
 footer {
-  width:270px;
-  float:left;
-  position:fixed;
-  bottom:50px;
+  width:auto;
+  margin-top:auto;
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
@@ -256,6 +263,15 @@ footer {
   div.wrapper {
     width:auto;
     margin:0;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* Single-column layout: dissolve the sidebar wrapper so its children take
+     part in the wrapper's flow, then restore document order - header, content,
+     footer. Without this the footer would land above the content. */
+  .sidebar {
+    display:contents;
   }
 
   header, section, footer {
@@ -265,14 +281,21 @@ footer {
   }
 
   header {
+    order:1;
     padding-right:320px;
   }
 
   section {
+    order:2;
     border:1px solid #e5e5e5;
     border-width:1px 0;
     padding:20px 0;
     margin:0 0 20px;
+  }
+
+  footer {
+    order:3;
+    margin-top:0;
   }
 
   header a small {
