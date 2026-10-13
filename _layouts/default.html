@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>{% if page.title %}{{ page.title }} &middot; {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+    <!-- Icons. Deliberately not cache-busted: long-lived favicon caching is wanted,
+         and browsers key their favicon cache off the URL. -->
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ '/favicon-48x48.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+    <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+
+    <link rel="stylesheet" href="{{ '/stylesheets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+    <link rel="stylesheet" href="{{ '/stylesheets/pygment_trac.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body{% if page.layout == 'post' %} class="post"{% endif %}>
+    <div class="wrapper">
+{% include sidebar.html %}
+      <section>
+{{ content }}
+      </section>
+    </div>
+    <script src="{{ '/javascripts/scale.fix.js' | relative_url }}"></script>
+  </body>
+</html>

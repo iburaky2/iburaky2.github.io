@@ -1,51 +1,9 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>iburaky</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="sidebar">
-        <header>
-          <img class="avatar" src="img/me_square.jpg" alt="Ibrahim Burak Yorulmaz">
-          <h1>Ibrahim Burak Yorulmaz</h1>
-          <ul class="links">
-            <li><a href="https://github.com/iburaky2"><i class="fa-fw fa-brands fa-github"   aria-hidden="true"></i> GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/iburaky/"><i class="fa-fw fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
-            <li><a href="mailto:iburaky.dev@gmail.com"><i class="fa-fw fa-solid  fa-envelope" aria-hidden="true"></i> Email</a></li>
-          </ul>
-          <!--
-          <p>A Theme for GitHub Pages</p>
-          <p class="view"><a href="http://github.com/orderedlist/minimal">View the Project on GitHub <small>orderedlist/minimal</small></a></p>
-          <ul>
-            <li><a href="https://github.com/orderedlist/minimal/zipball/master">Download <strong>ZIP File</strong></a></li>
-            <li><a href="https://github.com/orderedlist/minimal/tarball/master">Download <strong>TAR Ball</strong></a></li>
-            <li><a href="http://github.com/orderedlist/minimal">Fork On <strong>GitHub</strong></a></li>
-          </ul>
-          -->
-        </header>
-        <footer>
-          <!--
-          <p>This project is maintained by <a href="http://github.com/orderedlist">Steve Smith</a></p>
-          -->
-          <p><small>The contents of this website do not represent the views of my current or any of my former employers. All opinions are entirely my own.</small></p>
-          <p><small>Hosted on GitHub Pages &mdash; Theme based on <a href="https://github.com/orderedlist/minimal">minimal</a> by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-        </footer>
-      </div>
-      <section>
+---
+layout: default
+---
         <h2>About Me</h2>
         <p>
-        Hello there! I'm Burak.
+        Hello there, I'm Burak!
         </p>
         <p>
         I (will) post about stuff I tinker with here.
@@ -54,10 +12,9 @@
 
         <h2>Blog Posts</h2>
 
-        <p>Coming soon...</p>
+        <ul>
+          {% for post in site.posts %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> &mdash; <small>{{ post.date | date: "%b %-d, %Y" }}</small></li>
+          {% endfor %}
+        </ul>
 
-      </section>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-  </body>
-</html>

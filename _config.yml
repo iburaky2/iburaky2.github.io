@@ -1,0 +1,16 @@
+# The github-pages gem defaults `theme` to jekyll-theme-primer. This site
+# vendors the orderedlist/minimal stylesheets in stylesheets/ instead, so opt
+# out of the theme gem entirely. Without this, `layout: default` would resolve
+# to primer's layout and primer's assets would be published at /assets/css/.
+theme:
+
+title: iburaky
+url: https://iburaky.com
+author: Ibrahim Burak Yorulmaz
+
+# permalink: /:year/:month/:day/:title/
+permalink: /:title/
+
+# NOTE: deliberately no `exclude:` key here. The github-pages gem sets
+# `exclude: ["CNAME"]` as a user-overwritable default, and arrays do not
+# deep-merge — adding our own list would silently drop the CNAME exclusion.

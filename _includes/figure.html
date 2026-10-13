@@ -1,0 +1,25 @@
+{%- comment -%}
+  Responsive figure for post bodies.
+
+    src      base path under img/posts/, without the size suffix or extension.
+             Expects matching siblings: <src>-500.webp and <src>-1000.webp
+    alt      required
+    caption  optional; rendered italic by the figcaption rule in styles.css
+    height   pixel height of the 1000px-wide file. Recommended - it lets the
+             browser reserve the space so the page doesn't jump while loading.
+
+  {% include figure.html src="riscv-benchmark/dock" height="577"
+     alt="A Lichee RV Dock single-board computer"
+     caption="The Lichee RV Dock by Sipeed, ..." %}
+{%- endcomment -%}
+{%- assign base = '/img/posts/' | append: include.src -%}
+<figure>
+  <img src="{{ base | append: '-1000.webp' | relative_url }}"
+       srcset="{{ base | append: '-500.webp' | relative_url }} 500w, {{ base | append: '-1000.webp' | relative_url }} 1000w"
+       sizes="(max-width: 960px) 100vw, 760px"
+       {% if include.height %}width="1000" height="{{ include.height }}" {% endif %}loading="lazy"
+       alt="{{ include.alt }}">
+{% if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+{% endif %}
+</figure>

@@ -336,6 +336,19 @@ footer {
   }
 }
 
+@media screen and (min-width: 961px) {
+
+  body.post div.wrapper {
+    width:auto;
+    max-width:1100px;
+  }
+
+  body.post section {
+    width:calc(100% - 340px);
+    max-width:760px;
+  }
+}
+
 @media print, screen and (max-width: 720px) {
   body {
     word-wrap:break-word;
@@ -374,4 +387,125 @@ footer {
     font-size:12pt;
     color:#444;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Collapsible sections in post bodies.
+   Written in Markdown as `<details markdown="1">` / `<summary>`; the behaviour
+   is native HTML, this block is styling only. The theme ships no rules for
+   these elements, so without it the summaries stack with no spacing and give
+   no hint that they are interactive.
+   --------------------------------------------------------------------------- */
+
+details {
+  margin:0 0 20px;
+  /* Lets ::details-content animate to `auto`. Ignored where unsupported. */
+  interpolate-size:allow-keywords;
+}
+
+/* Tighten the gap between consecutive expanders, but keep the full vertical
+   rhythm after the group so it still reads as one block. */
+details:has(+ details) {
+  margin-bottom:8px;
+}
+
+/* Keep the revealed content flush against the summary row. */
+details > *:last-child {
+  margin-bottom:0;
+}
+
+details > summary {
+  /* Borrow the theme's link colour and weight - the one accent this design has. */
+  color:#39c;
+  font-weight:500;
+  cursor:pointer;
+  padding:2px 0;
+  /* Drop the default disclosure triangle; we draw our own below. */
+  list-style:none;
+}
+
+details > summary::-webkit-details-marker {
+  display:none;
+}
+
+/* Caret drawn with borders rather than the `\25B8` glyph. That glyph is the
+   "small" variant and carries a lot of built-in side bearing, so it stays
+   visually tiny however much the font-size is scaled - and rotating it drags
+   the shape off-centre, because its ink is not centred in the em box. Borders
+   give exact dimensions and a box that rotates around its own centre. */
+details > summary::before {
+  content:"";
+  display:inline-block;
+  width:0;
+  height:0;
+  margin-right:0.45em;
+  border-top:0.4em solid transparent;
+  border-bottom:0.4em solid transparent;
+  border-left:0.6em solid currentColor;
+  /* Distance the caret is raised above the baseline. `middle` sits at roughly
+     -0.14em for this box; -0.05em nudges it up from there. Raise the value
+     (less negative) to move the caret up, lower it to move it down. */
+  vertical-align:-0.05em;
+  transition:transform 0.2s ease;
+}
+
+details[open] > summary::before {
+  transform:rotate(90deg);
+}
+
+details > summary:hover {
+  color:#069;
+}
+
+/* Animate open/close. Requires `::details-content`; browsers without it snap
+   open exactly as they did before. */
+@supports selector(details::details-content) {
+  details::details-content {
+    /* Tinted panel so the revealed text reads as a unit distinct from the
+       running prose. #f4f4f4 is the theme's existing panel tone (see
+       `header ul`); #f8f8f8 is left to <pre>, so code blocks nested inside an
+       expander stay distinguishable.
+       Vertical padding is applied only while open: padding sits outside the
+       content box, so a collapsed panel would otherwise still render 20px tall
+       and leave a gap beneath every summary. */
+    box-sizing:border-box;
+    background:#f4f4f4;
+    border-left:2px solid #e0e0e0;
+    padding:0 16px;
+
+    block-size:0;
+    overflow:hidden;
+    transition:block-size 0.25s ease, content-visibility 0.25s ease;
+    transition-behavior:allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size:auto;
+    padding-block:10px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Images and figures in post bodies.
+   --------------------------------------------------------------------------- */
+
+/* Once <img> carries width/height attributes, `max-width:100%` can squash the
+   image unless the height is free to follow the aspect ratio. `.avatar` keeps
+   its 150px height because a class selector outranks this element selector. */
+img {
+  height:auto;
+}
+
+figcaption {
+  font-style:italic;
+  margin-top:6px;
+}
+
+/* Inline code used as link text, e.g. [`pad_cpu_sys_cnt`](url) in Markdown.
+   The theme's `code, pre { color:#333 }` rule comes after `a { color:#39c }`
+   at equal specificity, so it wins and the link renders in body grey with no
+   hover feedback. Inheriting from the link restores both, because the <code>
+   then follows whatever colour the <a> currently has. */
+a code {
+  color:inherit;
 }
