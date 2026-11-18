@@ -58,7 +58,7 @@ This means that each time a core modifies data, if that data also lives in the c
 any of the other cores, the cache lines in the other cores have to be invalidated.
 If the two cores are modifying the same data, for example with atomics, this is a necessary cost.
 But if they are modifying different data in the same cache line,
-it can be avoided by moving the two different pieces of data inside different cache lines.
+the performance drop can be avoided by moving the two different pieces of data inside different cache lines.
 
 ## Sweeping Alignment
 
