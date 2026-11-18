@@ -501,6 +501,35 @@ figcaption {
   margin-top:6px;
 }
 
+/* Inline code in prose. The theme only styles `code` and `pre` together, so a
+   `foo` in a sentence renders in the same grey as the body text and is only
+   distinguishable by the monospace face. A tinted chip sets it apart.
+
+   The `:not(pre) > code` selector is what keeps fenced blocks untouched:
+   highlighted blocks are `<pre><code>` (or `.highlight pre`), so their `code`
+   is excluded and keeps the existing #f8f8f8 panel. #e8e8e8 is used rather
+   than the #f4f4f4 panel tone so chips stay visible inside the tinted
+   expander panels defined above. */
+:not(pre) > code {
+  background:#e8e8e8;
+  /* A hairline edge in the same family as the <pre> border. The fill alone is
+     enough on the white page but nearly disappears against the tinted
+     expander panels, where the border does most of the separating. */
+  border:1px solid #d4d4d4;
+  border-radius:3px;
+  /* Horizontal breathing room around the text; vertical padding is kept small
+     because it does not grow the line box on an inline box and would otherwise
+     simply overlap neighbouring lines. */
+  padding:0.05em 0.3em;
+  /* Monospace faces have a large x-height and look oversized next to the body
+     font at the same em size. */
+  font-size:0.9em;
+  /* Long identifiers can wrap; clone the chip onto each fragment instead of
+     drawing one box around the first line only. */
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+
 /* Inline code used as link text, e.g. [`pad_cpu_sys_cnt`](url) in Markdown.
    The theme's `code, pre { color:#333 }` rule comes after `a { color:#39c }`
    at equal specificity, so it wins and the link renders in body grey with no
