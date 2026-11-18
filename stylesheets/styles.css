@@ -530,6 +530,37 @@ figcaption {
   -webkit-box-decoration-break:clone;
 }
 
+/* Static aside box for prose that should stand out without being collapsible.
+   Written in Markdown as `<div class="note" markdown="1">` ... `</div>`; the
+   `markdown="1"` attribute is what makes kramdown parse the inner content, so
+   links, inline code and emphasis inside keep working.
+
+   Styled to match the revealed body of a <details> expander (see
+   `details::details-content` above): same #f4f4f4 fill, same 2px left rule and
+   side padding, same rhythm. Keep the two in sync if either changes.
+
+   Because the fill equals the expander panel's, a note nested inside an open
+   <details> would be indistinguishable from its surroundings - put notes at the
+   top level of the post body. */
+.note {
+  box-sizing:border-box;
+  background:#f4f4f4;
+  border-left:2px solid #e0e0e0;
+  /* Mirrors `padding:0 16px` plus `padding-block:10px` on the open expander. */
+  padding:10px 16px;
+  margin:0 0 20px;
+}
+
+/* Normalise the first/last child so the box height does not depend on whether
+   the author opened with a paragraph or a list. */
+.note > :first-child {
+  margin-top:0;
+}
+
+.note > :last-child {
+  margin-bottom:0;
+}
+
 /* Inline code used as link text, e.g. [`pad_cpu_sys_cnt`](url) in Markdown.
    The theme's `code, pre { color:#333 }` rule comes after `a { color:#39c }`
    at equal specificity, so it wins and the link renders in body grey with no
